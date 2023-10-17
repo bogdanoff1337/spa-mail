@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/auth/google', [LoginController::class, 'redirectToProvider']);
+Route::get('/auth/google/call-back', [LoginController::class, 'handleGoogleCallback']);
+Route::get('/auth/google/logout', [LoginController::class, 'logout']);
+Route::get('/api/getUserName', [LoginController::class, 'getUserName']);
+Route::post('/api/tasks', [TaskController::class, 'store']);
+
+Route::get('{any?}', fn () => view('app'))->where('any', '.*');
