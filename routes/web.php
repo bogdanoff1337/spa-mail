@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth/google', [LoginController::class, 'redirectToProvider']);
-Route::get('/auth/google/call-back', [LoginController::class, 'handleGoogleCallback']);
-Route::get('/auth/google/logout', [LoginController::class, 'logout']);
-Route::get('/api/getUserName', [LoginController::class, 'getUserName']);
-Route::post('/api/tasks', [TaskController::class, 'store']);
+Route::post('/api/register', [UserController::class,'store']);
+Route::post('/api/login', [UserController::class,'login']);
 
 Route::get('{any?}', fn () => view('app'))->where('any', '.*');
